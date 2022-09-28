@@ -61,7 +61,7 @@ console.log(arrayMutate([1,2,3], (v) =>  v * 10 ));
  and adds it to the number bering  brought in
 */
 
-export function createAdder(num: number) {
+export function createAdder(num: number): (val: number) => number {
     return (val: number) => num + val;
 }
 
