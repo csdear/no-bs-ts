@@ -50,6 +50,17 @@ export function arrayMutate(
 console.log(arrayMutate([1,2,3], (v) =>  v * 10 ));
 // execute in console using : npx ts-node funcs-and-funcs.ts
 // OUTPUT : [ 10, 20, 30 ]
-// Cool! but this is  hard to read...
-// wouldnt it  be better to use an  interface or type?
-// ez,
+
+/*|RETURNING FUNCTIONS|
+ Functions that return functions
+ Create classic JS closure
+ It takes a number as p1 "num"
+ And returns a new function
+ Which takes a number as well "val"
+ Then takes the original number "num"
+ and adds it to the number bering  brought in
+*/
+
+export function createAdder(num: number) {
+    return (val: number) => num + val;
+}
