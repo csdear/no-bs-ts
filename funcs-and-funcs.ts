@@ -64,3 +64,11 @@ console.log(arrayMutate([1,2,3], (v) =>  v * 10 ));
 export function createAdder(num: number) {
     return (val: number) => num + val;
 }
+
+//INV
+// addOne is a new function, we initializeded with a "num" of 1
+const addOne = createAdder(1);
+// Then we can invoke the new addOne function
+console.log(addOne(55));
+//OUPUT : 56
+// TAG : SUM function. initialize a starting value then add on top of that.
