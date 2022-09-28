@@ -17,9 +17,32 @@ export function printToFile(text: string, callback: () => void):  void {
 // p1 the numbers  array, p2 the cb fn() that is given each number and
 // returns a new  number array.  We gonna call the cb fn() mutate.
 // return with map, giving it the mutate function
-export function arrayMutate(numbers: number[], mutate: (v: number) => number ): number[] {
-    return numbers.map(mutate)
+// We then Created a type, just copy the "(v: number) => number" to it.
+// Using a type reads better rahter than what you see in (Old.)
+// Notice you can export the type as well (we prepended 'export' too)
+// So That when someone creates a  new mutation function they
+// can use the same type
+
+// New. Added Type. Reads better. Exported also for reuse elewhere.
+export type MutatationFunction = (v: number) => number
+
+export function arrayMutate(
+    numbers: number[],
+    mutate: MutatationFunction
+): number[] {
+   return numbers.map(mutate)
 }
+
+// Old. Prior version Hard to read.
+// export function arrayMutate(
+//     numbers: number[],
+//     mutate: (v: number) => number  //<-- this moved to a type.
+// ): number[] {
+//    return numbers.map(mutate)
+// }
+
+
+
 
 // invocation
 // hinted here we  need  an array of numbers for  p1, a function  for p2
@@ -28,3 +51,5 @@ console.log(arrayMutate([1,2,3], (v) =>  v * 10 ));
 // execute in console using : npx ts-node funcs-and-funcs.ts
 // OUTPUT : [ 10, 20, 30 ]
 // Cool! but this is  hard to read...
+// wouldnt it  be better to use an  interface or type?
+// ez,
