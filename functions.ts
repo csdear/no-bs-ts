@@ -28,6 +28,8 @@ export const printFormat = (title: string, param : string | number): void => {
 export const fetchData = (url: string): Promise<string> => Promise.resolve((`Data from ${url}`));
 
 // ts rest parameters
+// use rest parameters for indeterminable parameters, dynamic parameters
+// to essentially "catch" the rest.
 // any parameter received after the salutation is put into an array
 // of names (rest parameters)
 function introduce(salutation: string, ...names: string[] ): string {
