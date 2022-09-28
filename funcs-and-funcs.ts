@@ -41,8 +41,8 @@ export function arrayMutate(
 //    return numbers.map(mutate)
 // }
 
-
-
+// eg. elsewhere type MutationFunction could be reused like...
+// const myNewMuntateFunc: MutationFunction = (v: number) => v * 100;
 
 // invocation
 // hinted here we  need  an array of numbers for  p1, a function  for p2
