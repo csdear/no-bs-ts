@@ -24,7 +24,7 @@ export function printToFile(text: string, callback: () => void):  void {
 // can use the same type
 
 // New. Added Type. Reads better. Exported also for reuse elewhere.
-export type MutatationFunction = (v: number) => number
+export type MutatationFunction = (v: number) => number;
 
 export function arrayMutate(
     numbers: number[],
@@ -60,8 +60,9 @@ console.log(arrayMutate([1,2,3], (v) =>  v * 10 ));
  Then takes the original number "num"
  and adds it to the number bering  brought in
 */
+export type AdderFunction = (v: number) => number;
 
-export function createAdder(num: number): (val: number) => number {
+export function createAdder(num: number): AdderFunction {
     return (val: number) => num + val;
 }
 
