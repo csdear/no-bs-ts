@@ -19,6 +19,7 @@ import houses from './houses';
      id is needed first. set to zero id: 0, for the moment. Then spread everything else IN house -- ...house --
   6. better set the id, best to use index of the original array.  So we will set ID to the houses array INDEXOF,
      then id of this curren "house"
+  7. Change HouseWithId to EXTENDS House...  and then we do not need planets or name, as they are inheritied.  
 
  */
 interface House {
@@ -26,10 +27,8 @@ interface House {
     planets: string | string[];
     }
 
-    interface HouseWithID {
+    interface HouseWithID extends House {
         id: number;
-        name: string;
-        planets: string | string[];
     }
 
     // Overloads
@@ -57,9 +56,15 @@ interface House {
                     ...house
                 }))
         };
-
+    
+    // INV1
     console.log(
       findHouses(JSON.stringify(houses), ({ name }) => name === "Atreides")
     );
-
+    
+    // INV2
     console.log(findHouses(houses, ({ name }) => name === "Harkonnen"));
+
+    // Output : 
+    // [ { id: 0, name: 'Atreides', planets: 'Calladan' } ]
+    // [ { id: 2, name: 'Harkonnen', planets: [ 'Giedi Prime', 'Arrakis' ] } ]
