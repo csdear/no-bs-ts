@@ -1,29 +1,17 @@
 
 //GENERICS
-/*
-We copied this function from the prior tuples lesson.
-This functionn is heavy on type STRING (FIVE INSTANCES)
-*/
-            /*
-            function simpleStringState(initial: string): [() => string, (x: string) => void] {
-                let str: string = initial;
-                return [
-                    () => str,
-                    (x: string) => {
-                        str = x;
-                    }
-                ]
-            }
-            */
-/*
-|?|WHAT if we could on the fly replace STRING with SOME OTHER TYPE??? ANY TYPE?|?|
----------------------------------------------------------------------------------
-We can with generics.
-ALT+CLICK after each instance of 'string' and replace with 'T'
-and add a <T> before the params list
-"T" will be replaced with whatever is in initial state param
-side note we changed fn() name to simpleState and str to val since we are more
-generic now.
+/* OVERIDINNG INFERRED GENERIC TYPES
+We copy the prior invocation
+create a  second state, state2*
+and init will null instead of 10
+and in the setter we pass a string -- state2setter("str")
+But  we get ERROR :
+Argument of type '"str"' is not assignable to parameter of type 'null'.
+Problem is  that when we pass null into simpleState(), all the "T"s
+become null, that the only acceptable type is *null*. We tried to
+pass and pass a string "str" and it said nuh-uh.
+So we need to OVERRIDE T. we do this at simpleState's instantiation,
+const [state2getter, state2setter] = simpleState<string | null>(null)
 */
 
 function simpleState<T>(initial: T): [() => T, (x: T) => void] {
@@ -35,12 +23,13 @@ function simpleState<T>(initial: T): [() => T, (x: T) => void] {
         }
     ]
 }
-// Note when you type simpleState( and HOVER you see  type is UNKNOWN :
-    //simpleState(initial: unknown): [() => unknown, (x: unknown) => void]
-// BUT type a number -- simpleState(1) and watch it magically change to type NUMBER :
-    // simpleState(initial: number): [() => number, (x: number) => void]
+
     const [state1getter, state1setter] = simpleState(10)
     console.log(state1getter());
     state1setter(62);
     console.log(state1getter());
-// npx ts-node generics.ts
+
+    const [state2getter, state2setter] = simpleState<string | null>(null)
+    console.log(state2getter());
+    state2setter("str"); // Argument of type '"str"' is not assignable to parameter of type 'null'.
+    console.log(state2getter());
