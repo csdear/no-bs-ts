@@ -19,7 +19,7 @@ console.log(add3DCoordinate([0, 100, 0], [10, 20, 30]));
 
 /**
 React engineers deal with tuples all the time -- the useState
-is a tuple. useState returns a state, and a state setter
+is a tuple. useState returns a state, and a state settder
 
 We'll implement our own simpleStringState that  does something similar.
 It takes a 'initial' value *string* and is going to return a tuple.
