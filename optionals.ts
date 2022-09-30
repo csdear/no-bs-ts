@@ -26,24 +26,27 @@ function getEmailEasy(user: User): string {
     return user?.info?.email ?? "";
 }
 
-// |OPTIONAL FIELDS|
-// We create a User interface with string ID, and a Info object  that is optional -- can be null
-// and the email within is optional, can be null.
-// in the body of getEmail(), we check if the user has info, but notice our  return for the
-// true condition is in the RED -- (property)
-// email?: string | undefined
-// Type 'string | undefined' is not assignable to type 'string'.
-// Type 'undefined' is not assignable to type 'string'
-// To  get  around this error, if you know better than  typescript you can add a bang :
-        // return user.info!.email!;
-// Not good form though.. if you have alot of bangs in your code or css, you're probably
-/// doing something wrong.
-// To get around this better,
-//  Use optional chaining and nullish coalescing
-// Reads like if user exists, drill into info,if info exits drill to email, if email is null, then return an empty string ""
-// otherwise we are returning an email
-// You also are more succinct removing that if check and can get rid of the double return.
+function addWithCallback(x: number, y: number, callback?: () => void) {
+    console.log([x,y]);
+    callback?.();
+}
 
+
+// |OPTIONAL CALLBACKS|
+// 3 params : number, number, function
+// lets do something with x and y... console.log([x,y])
+// THenn invoke the callback to save ive dunnit.
+// BUT, what happens if the callback is OPTIONAL?
+// AT invocation, only x and y are passed.. no function?
+// first we optionalize it : callback?: () => void
+// second we need to do something with it in the body if a cb fn() was passed and if it wasnt.
+// We could old skool, wrap it in a  conditional like :
+        // console.log([x,y]);
+        //     if (callback) {
+        //         callback();
+        //     }
+// Sure, even easier is : callback?.();
+// Which will only invoke that fn() if that option exists.
 
 
 
