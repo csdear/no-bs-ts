@@ -6,20 +6,44 @@ function printIngredient(quantity: string, ingrediant: string, instructions?: st
 
 
 printIngredient("1C", "Flour");
-// Suppose we were working on the app and were like
-// dammit, we need to include instructions but we dont have a param for that...
 printIngredient("1C", "Flour", "Lightly Sift");
-// What do we do? We go up to the function signature and add a instructons param.
-// That makes our 3 param printIngrediant() happy, but now our  first 2  param
-// invocation is in the red. "Expected 3 arguments, but got 2"
-// To  fix, we add a question mark to instructions -- instructions?: string
-// Note after you  declare an optional, you CANNOT add a required. Like this
-// would bomb :  instructions?: string, requiredNuParam: string) {
-// You'd have to put the required before the optional and repair your invocations
-// or you  could also make  it optional on the tailend.
-// In  the function DEF body we need to do something with instructions, but it
-// has to work  for both function invocation variants
-// Easiest way to handle is a little ternary op -- ${instructions ? `${instructions}` : ""}`)
-// so if  there are instructions, print them. If not, do nothin, ""
+
+interface User {
+    id: string,
+    info?: {
+        email?: string;
+    }
+}
+
+function getEmail(user: User): string {
+    if (user.info) {
+        return user.info.email!;
+    }
+    return "";
+}
+
+function getEmailEasy(user: User): string {
+    return user?.info?.email ?? "";
+}
+
+// |OPTIONAL FIELDS|
+// We create a User interface with string ID, and a Info object  that is optional -- can be null
+// and the email within is optional, can be null.
+// in the body of getEmail(), we check if the user has info, but notice our  return for the
+// true condition is in the RED -- (property)
+// email?: string | undefined
+// Type 'string | undefined' is not assignable to type 'string'.
+// Type 'undefined' is not assignable to type 'string'
+// To  get  around this error, if you know better than  typescript you can add a bang :
+        // return user.info!.email!;
+// Not good form though.. if you have alot of bangs in your code or css, you're probably
+/// doing something wrong.
+// To get around this better,
+//  Use optional chaining and nullish coalescing
+// Reads like if user exists, drill into info,if info exits drill to email, if email is null, then return an empty string ""
+// otherwise we are returning an email
+// You also are more succinct removing that if check and can get rid of the double return.
+
+
 
 
