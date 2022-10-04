@@ -3,6 +3,12 @@ TS FILTER
 Type Safe FILTER-like using reduce
 Utilizing a generic type <T>
 Return an array of those generic types
+
+// MINIMALLY w/o reduce.
+    let fruitsArr: string[] = ["Apple","Banana", "Mango"];
+    console.log(fruitsArr.filter(fruit => fruit === "Apple"));
+
+
 */
 
 /*
