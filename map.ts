@@ -57,6 +57,6 @@ let experience_types: Experience_type[] = [
 let experience_ids: number[] = myMap(experience_types, (v) => v.value);
 console.log(experience_ids)
 
-
-let fruitsArr: string[] = ["Apple","Banana", "Mango"];
-console.log(fruitsArr.filter(fruit => fruit === "Apple"));
+// MINIMALLY w/o reduce, non-generics
+let fruitsArr3: string[] = ["Apple","Banana", "Mango"];
+console.log(fruitsArr3.map(fruit => fruit + " is good"));

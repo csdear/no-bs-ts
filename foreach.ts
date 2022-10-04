@@ -86,3 +86,6 @@ myForEach(monsters, (v) => {
 
 console.log(monsters);
 
+// MINIMALLY w/o reduce, non-generics
+let fruitsArr2: string[] = ["Apple","Banana", "Mango"]
+fruitsArr2.forEach(fruit => console.log("I am eating", fruit));

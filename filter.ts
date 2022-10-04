@@ -51,3 +51,7 @@ console.log(result);
 
 
 console.log(bOnly);
+
+// MINIMALLY w/o reduce, non-generics
+let fruitsArr: string[] = ["Apple","Banana", "Mango"];
+console.log('hey... my favorite:', fruitsArr.filter(fruit => fruit === "Apple"));
