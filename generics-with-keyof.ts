@@ -1,5 +1,6 @@
 /*
 Generics with keyof.
+|PLUCK| example1
  Pluck function allows us to pull from a list/array of objects
  data by key and return an array. Such as an array of all the dog's ages or names.
  a very good typescript alternative to a basic es6 map().
@@ -52,3 +53,64 @@ console.log(pluck(dogs, "name"));
  < [ 12, 13 ]
  < [ 'Roscoe', 'Augie' ]
 */
+
+
+/* |EVENTMAP| Example 2 |EVENT MAP||SQUELER|
+----------------------------------------------------------------------------
+|TS EVENT REPORTING|
+This is a great fn() that can be used for sending events perhaps for analytics
+or telemetry purposes. Here  we  define multiple events like 'addToCart' and
+'checkout', then later we invoke each, in a type safe way.
+Interface Event,  will have a time and a user.
+Phenomenal in its type safety. Tt has to be an event that i've listed in
+my EventMap  (addToCart or checkout)
+AND the data going into that event has to match
+the api that i'm putting here in here (eg BaseEvent & { quantity: number; productID: string;})
+
+*/
+interface BaseEvent {
+    time: number;
+    user: string;
+}
+
+/*
+Then define a Event map that defines each event,like a addToCart event or checkout event.
+quantity is an element of an item when added to the cart.
+Whats with the ampersand & ? it basically means your taking the TYPE on the left and
+ADDING it to the type on  the RIGHT.. so collectively BaseEvent, Quality and  productID.
+*/
+interface EventMap {
+    addToCart: BaseEvent & { quantity: number; productID: string;}
+    checkout: BaseEvent
+}
+
+// Send event function that sends some  sort of event data.
+// name  needs to be a key of
+// Name will be the generice keyof type, and we will type name as Name (instead of : string)
+// What will data be? ( instead  of : unknown). EventMap and whatever the name is.
+function sendEvent<Name extends keyof EventMap>(name: Name, data: EventMap[Name]): void {
+    // Your business logic to handle the event here...
+    console.log([name, data])
+}
+
+// Invoke send event
+// IDE neato, once we  add "" to the params we get option for 'addToCart' or 'checkout'
+// p2, neato we add "{}" and we have choices productId, quantity, time or user-- all that which
+// is allowed for addToCart event.
+sendEvent("addToCart", {productID: "Hampshire", user: "farmerDear@gmail.com", quantity: 3, time: 10});
+sendEvent("checkout", {time: 20, user: "farmerDear@gmail.com"});
+
+/* Output
+
+[
+     'addToCart',
+     {
+       productID: 'Hampshire',
+       user: 'farmerDear@gmail.com',
+       quantity: 3,
+       time: 10
+     }
+   ]
+   [ 'checkout', { time: 20, user: 'farmerDear@gmail.com' } ]
+*/
+
