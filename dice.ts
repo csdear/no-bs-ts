@@ -121,7 +121,8 @@ console.log("Roll d20 x 5 :",Roller(5, 20)); // Roll 1d4 ten times, summing resu
 // Acts as a wrapper... it calls function getRollResult  which does
 // the meat of the work, but rollingMachine is versatile, allowing
 // you to call alternative  method like "altResult" which do
-// something special.
+// something special. Tagging as a |WRAPPER FUNCTION|
+
 console.log('\n===|Rolling Machine|===');
 type AllowedDieTypes = 4 | 6 | 8 | 10 | 12 | 20;
 
