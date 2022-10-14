@@ -93,10 +93,31 @@ for the property name :
             onageChange: (newValue: number) => void;
         }
         ==============================================
- LO 7:22 utiilty type.
+ 19. We add the Capitalized ts utility function.
+ to get around "Type Property does not satisfy the constraint string."
+ we can add string and satisfy it.
+ Thus on CmdK,CmdI hover over DogInfoListeners we see  the proper
+ property names name :
+        onNameChange
+        onAgeChange
+20. IF we wanted them optional we could simply add ? so now
+specifying those listeners are optional. (onNameChange? onAgeChange?)
+21. What if we wanted additional listeners? Simply copy Listeners body
+then use a '&' Merge operator. And when you cmd K cmd I or hover over
+DogINfoListeners type, we see those new types :
+            type DogInfoListeners = {
+                onNameChange?: ((newValue: string) => void) | undefined;
+                onAgeChange?: ((newValue: number) => void) | undefined;
+            } & {
+                onNameDelete?: (() => void) | undefined;
+                onAgeDelete?: (() => void) | undefined;
+            }
+    ...
 */
 type Listeners<Type> = {
-    [Property in keyof Type as `on${Property}Change` ]: (newValue: Type[Property]) => void;
+    [Property in keyof Type as `on${Capitalize<string & Property>}Change`]?: (newValue: Type[Property]) => void;
+} & {
+    [Property in keyof Type as `on${Capitalize<string & Property>}Delete`]?: () => void;
 }
 //14. Then we can lype listeners with type Listeners<T>
 function listenToObject<T>(obj: T, listeners: Listeners<T>): void {
@@ -130,7 +151,13 @@ const roscoe: DogInfo = {
 */
 type DogInfoListeners = Listeners<DogInfo>
 
+/*
+21... then add those new listeners
+22. Last thing, review this : https://www.typescriptlang.org/docs/handbook/2/mapped-types.html
+*/
 listenToObject(roscoe, {
     onNameChange: (v: string) => {},
     onAgeChange: (v: number) => {},
+    onNameDelete: () => {}, // a void
+    onAgeDelete: () => {}, // a void
 })
