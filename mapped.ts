@@ -41,8 +41,19 @@ const dog: MyFlexibleDog = {
     age: 33, // Flex.
 }
 
-// |MAPPED TYPES AND TEMPLATE LITERALS|
-//5. DogInfo interface
+/* |MAPPED TYPES AND TEMPLATE LITERALS|
+ TypeScript feature that allow authors to keep their types DRY (“Don’t Repeat Yourself”)
+ especially useful when there is a need for a type to be derived from (and remain in sync with) another type.
+ interface DogInfo here is the BASE type. the basic info of a dog, with a name and age.
+ a new type 'DogInfoOptions' is created, which is assigned this OptionsFlags type, which 
+ essentally takes the key name, age or name, then applies type boolean to it.
+ Thus if inheriting from type DogInfoOptions, type can be boolean.
+
+ Furthermore, around step (9.) we implement a Listener construct.
+
+
+*/
+//[5.] DogInfo interface
 interface DogInfo {
     name: string;
     age: number;
@@ -128,6 +139,8 @@ type Listeners<Type> = {
 }
 //14. Then we can lype listeners with type Listeners<T>
 function listenToObject<T>(obj: T, listeners: Listeners<T>): void {
+    console.log('inside listeToObject');
+    console.log('listeners', listeners);
     throw "Needs to be implemented";
 }
 
