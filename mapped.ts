@@ -4,12 +4,19 @@
 
 // |I. Types with Flexible Fields |
 
+/* Flexible dog. Here we create a a type of 'myFlexiblieDog' which has a required
+    name ot string AND a flexible property, this [key: string]: string | number;
+    At instantiation, breed and age are flex, not cited, but allowed, as long as
+    they are or string or number.  
+    This would be good for things like a Flexible in Code IRL:
+     I could see using this for TS and CSS  -- where maybe you have certain values
+    that are required like flex-direction and others that might not be required but still used,
+    like allowing flex-grow or flex-shrink.
+*/
 /*[1.] Start with creating a flexible interface for a dog.
 A flexible dog Info object with one required field and potentially a flexible set of fields.
 
-Flexible in Code IRL: I could see using this for TS and CSS  -- where maybe you have certain values
-that are required like flex-direction and others that might not be required but still used,
-like allowing flex-grow or flex-shrink.
+
 
 Name is the only required field.
 We want to be  "Open" to additional fields. You can put  anything as long as it is a string so we
