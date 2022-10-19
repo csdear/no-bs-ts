@@ -11,6 +11,8 @@
  * 
  * POKEAPI : https://pokeapi.co/api/v2/pokemon?limit=10
  * 
+ * Comments ? can this be used for conditional rendering? based on type
+ * Sadly no. Typescript doesn’t exist at runtime. So if you want to do runtime typechecking you’ll have to do that with the JavaScript typeOf.
  * Other off-label uses : TS and api responses
  */
 
@@ -77,6 +79,24 @@ function fetchPokemon<T extends undefined | ((data: PokemonResults) => void)>(
 // solved by going up to the type FetchPokemonResults removing the "[]"
 // and the fetchPokemon function definition, removing the "[]" from PokemonResults
 // -- essentially PokemonResults is not an array. 
-fetchPokemon("https://pokeapi.co/api/v2/pokemon?limit=10", (data) => {
+// fetchPokemon("https://pokeapi.co/api/v2/pokemon?limit=10", (data) => {
+//     data.results.forEach((pokemon) => console.log(pokemon.name));
+// })
+
+//9. invocation promise version
+// commenting out #8 
+// if you run into type issues, eg data: void | PokemonResults, we can use type coercion.
+// type coercion done to ways. you can use AS keyword at the end to coerce to PokemonResults...
+// e.g., ")) as PokemonResults".   Or, use the Generic syntax like --
+// -- const data = <PokemonResults>(
+// im using AS keyword, because my stupid ide thinks <PokemmonResults> is JSX for some reason  
+(async function () {
+    const data = (await fetchPokemon(
+        "https://pokeapi.co/api/v2/pokemon?limit=10"
+    )) as PokemonResults;
     data.results.forEach((pokemon) => console.log(pokemon.name));
-})
+})(); 
+
+//10. good but we dont like how promise variant of this invocation has to do this coercion--
+// kinda messy. We going to use some of the functional overloading stuff we saw prior
+// to make this a cleaner api
