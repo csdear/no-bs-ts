@@ -58,10 +58,11 @@ function fetchPokemon<T extends undefined | ((data: PokemonResults) => void)>(
 ): FetchPokemonResult<T> {
 //6a. if its a callback we want to fetch that url, get the response back, get the JSON out of that,
 // then, call the callback (.then(cb))
+//## FIX NOTE: 2nd .then was erroring on cb, casted to 'as any' to fix.
     if (cb) {
         fetch(url)
             .then((resp) => resp.json())
-            .then(cb);
+            .then(cb as any);
 //7b. Happy now?
             return undefined as FetchPokemonResult<T>;
     }
