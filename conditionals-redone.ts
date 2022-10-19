@@ -2,7 +2,7 @@
 Note was getting error trying to run because using node-fetch, and there is some hiccup in require
 vs import
 
-PROBLEM : 
+PROBLEM :
 Error [ERR_REQUIRE_ESM]: require() of ES Module G:\Repos\no-bs-ts\ts-basics\node_modules\node-fetch\src\index.js from G:\Repos\no-bs-ts\ts-basics\conditionals-redone.ts not supported.
 Instead change the require of index.js in G:\Repos\no-bs-ts\ts-basics\conditionals-redone.ts to a dynamic import() which is available in all CommonJS modules.
     at require.extensions.<computed> [as .js] (G:\Repos\no-bs-ts\ts-basics\node_modules\ts-node\dist\index.js:851:20)
@@ -15,7 +15,7 @@ Instead change the require of index.js in G:\Repos\no-bs-ts\ts-basics\conditiona
     at Object.<anonymous> (G:\Repos\no-bs-ts\ts-basics\node_modules\ts-node\dist\bin.js:579:5) {
   code: 'ERR_REQUIRE_ESM'
 
-SOLUTION 
+SOLUTION
 -  (It was complicated and followed every try on stack overflow)
 - ref : Hoziefa Alhassan : https://stackoverflow.com/questions/62096269/cant-run-my-node-js-typescript-project-typeerror-err-unknown-file-extension
 
@@ -37,7 +37,9 @@ SOLUTION
 3. npx ts-node conditionals-redone.ts
 <<< successful list of pokemons...
 
+----------
 
+Cleaner  implmention.
 
 */
 
